@@ -1,14 +1,14 @@
 use super::method::{Method, MethodError};
+use super::QueyString;
 use std::convert::TryFrom;
 use std::error::Error;
 use std::fmt::{Formatter, Result as FmtResult,Display, Debug};
 use std::str;
 use std::str::Utf8Error;
 
-
 pub struct Request<'buf>{
     path: &'buf str,
-    query_string: Option<&'buf str>,
+    query_string: Option<QueyString<'buf>>,
     method: Method,
 }
 
@@ -74,7 +74,7 @@ impl<'buf> TryFrom<&'buf [u8]> for Request<'buf> {
         //OR  
 
         if let Some(i) = path.find('?'){
-            query_string = Some(&path[i+1..]);
+            query_string = Some(QueyString::from(&path[i+1..]));
             path = &path[..i];
         }
 
