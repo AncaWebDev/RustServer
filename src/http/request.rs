@@ -6,6 +6,7 @@ use std::fmt::{Formatter, Result as FmtResult,Display, Debug};
 use std::str;
 use std::str::Utf8Error;
 
+#[derive(Debug)]
 pub struct Request<'buf>{
     path: &'buf str,
     query_string: Option<QueyString<'buf>>,

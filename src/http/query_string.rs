@@ -1,9 +1,11 @@
 use std::collections::HashMap;
 
+#[derive(Debug)]
 pub struct QueyString<'buf> {
     data: HashMap<&'buf str, Value<'buf>>
 }
 
+#[derive(Debug)]
 pub enum Value<'buf> {
     Single(&'buf str),
     Multiple(Vec<&'buf str>)
@@ -45,9 +47,7 @@ impl<'buf> From<&'buf str> for QueyString<'buf>{
             .or_insert(Value::Single(val));
         
         }    
-        QueyString {data};
-
-        unimplemented!()
+        QueyString {data}
     }
     
 }
